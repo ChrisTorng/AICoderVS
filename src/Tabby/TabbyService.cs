@@ -9,6 +9,12 @@ namespace AICoderVS.Tabby
 {
     public class TabbyService
     {
+        private JsonSerializerOptions options = new JsonSerializerOptions()
+        {
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
+        };
+
         private readonly HttpClient _httpClient;
         private string _baseUrl;
         private string _bearerToken;
@@ -49,7 +55,7 @@ namespace AICoderVS.Tabby
                 HttpResponseMessage response = await _httpClient.GetAsync("/v1/health");
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                return JsonSerializer.Deserialize<HealthState>(responseBody);
+                return JsonSerializer.Deserialize<HealthState>(responseBody, options);
             }
             catch (HttpRequestException e)
             {

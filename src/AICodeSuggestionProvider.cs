@@ -1,3 +1,4 @@
+using AICoderVS.Tabby;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Utilities;
