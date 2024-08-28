@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Net;
@@ -65,6 +66,31 @@ namespace AICoderVS.Tabby
             catch (JsonException e)
             {
                 MyLog.Log($"Error when parsing response: {e.Message}");
+                throw;
+            }
+        }
+
+        public async Task<CompletionResponse> GetCompletionAsync(CompletionRequest request)
+        {
+            try
+            {
+                var json = JsonSerializer.Serialize(request, options);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _httpClient.PostAsync("/v1/completions", content);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<CompletionResponse>(responseBody, options);
+            }
+            catch (HttpRequestException e)
+            {
+                MyLog.Log($"Error when sending completion request: {e.Message}");
+                throw;
+            }
+            catch (JsonException e)
+            {
+                MyLog.Log($"Error when parsing completion response: {e.Message}");
                 throw;
             }
         }

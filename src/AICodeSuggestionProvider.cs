@@ -80,17 +80,27 @@ namespace AICoderVS
             TabbyService tabbyService = new TabbyService();
             try
             {
-                HealthState healthState = await tabbyService.GetHealthStateAsync();
-                MyLog.Log($"Tabby version: {healthState.Version.GitDescribe}");
-                MyLog.Log($"CPU info: {healthState.CpuInfo}");
-                MyLog.Log($"Device: {healthState.Device}");
+                var pos = caretPosition.Position;
+                var prefix = currentLineText.Substring(0, pos);
+                var suffix = currentLineText.Substring(pos, currentLineText.Length - pos);
+                CompletionRequest request = new CompletionRequest()
+                {
+                    Language = "markdown",
+                    Segments = new Segments()
+                    {
+                        Prefix = prefix,
+                        Suffix = suffix,
+                    },
+                };
+
+                CompletionResponse completion = await tabbyService.GetCompletionAsync(request);
+                return completion.Choices[0].Text;
             }
             catch (Exception ex)
             {
-                MyLog.Log($"Get healthState error: {ex.Message}");
+                MyLog.Log($"Get completion error: {ex.Message}");
+                return null;
             }
-
-            return "AI Suggestion: " + currentLineText;
         }
 
         public void AcceptAISuggestion()
