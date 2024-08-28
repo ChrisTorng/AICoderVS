@@ -1,0 +1,16 @@
+{
+    "model": "Remote",
+    "chat_model": "Remote",
+    "device": "cpu",
+    "arch": "x86_64",
+    "cpu_info": "AMD EPYC 7B13",
+    "cpu_count": 8,
+    "cuda_devices": [],
+    "version": {
+        "build_date": "2024-08-09",
+        "build_timestamp": "2024-08-09T06:40:01.666632464Z",
+        "git_sha": "0564a6756822f9357f17190cdace129a31f3496b",
+        "git_describe": "v0.15.0"
+    },
+    "webserver": true
+}

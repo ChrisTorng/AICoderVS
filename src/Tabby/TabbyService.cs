@@ -3,23 +3,36 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Net;
+using System.IO;
 
-namespace AICoderVS
+namespace AICoderVS.Tabby
 {
     public class TabbyService
     {
         private readonly HttpClient _httpClient;
-        private const string BaseUrl = "https://tabby-chris-torng-8a8dded8.mt-guc1.bentoml.ai";
+        private string _baseUrl;
+        private string _bearerToken;
 
         public TabbyService()
         {
+            LoadServiceConfig();
+
             var handler = new HttpClientHandler
             {
                 UseProxy = true,
                 Proxy = GetSystemWebProxy()
             };
             _httpClient = new HttpClient(handler);
-            _httpClient.BaseAddress = new Uri(BaseUrl);
+            _httpClient.BaseAddress = new Uri(_baseUrl);
+            _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_bearerToken}");
+        }
+
+        private void LoadServiceConfig()
+        {
+            string json = File.ReadAllText("Service.json");
+            var config = JsonSerializer.Deserialize<ServiceConfig>(json);
+            _baseUrl = config.Server;
+            _bearerToken = config.Token;
         }
 
         private IWebProxy GetSystemWebProxy()
@@ -49,27 +62,5 @@ namespace AICoderVS
                 throw;
             }
         }
-    }
-
-    public class HealthState
-    {
-        public string Model { get; set; }
-        public string ChatModel { get; set; }
-        public string ChatDevice { get; set; }
-        public string Device { get; set; }
-        public string Arch { get; set; }
-        public string CpuInfo { get; set; }
-        public int CpuCount { get; set; }
-        public string[] CudaDevices { get; set; }
-        public Version Version { get; set; }
-        public bool? Webserver { get; set; }
-    }
-
-    public class Version
-    {
-        public string BuildDate { get; set; }
-        public string BuildTimestamp { get; set; }
-        public string GitSha { get; set; }
-        public string GitDescribe { get; set; }
     }
 }

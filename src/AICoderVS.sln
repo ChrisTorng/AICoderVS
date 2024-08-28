@@ -8,7 +8,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tabby", "Tabby", "{AC5421D0-4720-43E9-BE39-DFBC31AEC90C}"
 	ProjectSection(SolutionItems) = preProject
 		..\Tabby\completion.json = ..\Tabby\completion.json
+		..\Tabby\health.json = ..\Tabby\health.json
 		..\Tabby\openapi.json = ..\Tabby\openapi.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{AF9E9C7D-E411-42E2-B443-F61E12FF3F74}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Global

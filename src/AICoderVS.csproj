@@ -50,7 +50,10 @@
     <Compile Include="MyTabEnterHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AICoderVSPackage.cs" />
-    <Compile Include="TabbyService.cs" />
+    <Compile Include="Tabby\HealthState.cs" />
+    <Compile Include="Tabby\ServiceConfig.cs" />
+    <Compile Include="Tabby\TabbyService.cs" />
+    <Compile Include="Tabby\Version.cs" />
     <Compile Include="TestCompletionCommandHandler.cs" />
     <Compile Include="TestCompletionHandlerProvider.cs" />
     <Compile Include="TestCompletionSource.cs" />
@@ -60,6 +63,10 @@
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Sample.Service.json" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
