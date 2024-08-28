@@ -3,8 +3,7 @@
     <Metadata>
         <Identity Id="AICoderVS.74837555-3460-4da2-a4b6-e1f955ed1a96" Version="1.0" Language="en-US" Publisher="ChrisTorng" />
         <DisplayName>AICoderVS</DisplayName>
-        <Description xml:space="preserve">About
-Visual Studio 2022 extension to provide AI coding assistant.</Description>
+        <Description xml:space="preserve">Visual Studio 2022 extension to provide AI coding assistant.</Description>
         <Preview>true</Preview>
     </Metadata>
     <Installation>
@@ -20,6 +19,6 @@ Visual Studio 2022 extension to provide AI coding assistant.</Description>
     </Prerequisites>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
-      <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%|" />
-  </Assets>
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%|" />
+    </Assets>
 </PackageManifest>
