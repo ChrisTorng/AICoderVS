@@ -2,12 +2,14 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Utilities;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace AICoderVS
 {
+    [Export(typeof(AICodeSuggestionProvider))]
     [Export(typeof(IWpfTextViewCreationListener))]
     [ContentType("text")]
     [TextViewRole(PredefinedTextViewRoles.Editable)]
@@ -30,9 +32,6 @@ namespace AICoderVS
 
             // Modify subscription method
             textView.TextBuffer.Changed += (sender, e) => Task.Run(() => TextBuffer_ChangedAsync(sender, (TextContentChangedEventArgs)e));
-
-            // Subscribe to key events
-            textView.VisualElement.KeyDown += OnKeyPressed;
         }
 
         private async Task TextBuffer_ChangedAsync(object sender, TextContentChangedEventArgs e)
@@ -81,23 +80,28 @@ namespace AICoderVS
             return "AI Suggestion: " + currentLineText;
         }
 
-        private void OnKeyPressed(object sender, System.Windows.Input.KeyEventArgs e)
+        public void AcceptAISuggestion()
         {
-            if (e.Key == Key.Tab)
-            {
-                // Accept AI suggestion
-                AcceptAISuggestion();
-            }
-            else
-            {
-                // Clear tooltip
-                _tooltipControl.IsOpen = false;
-            }
-        }
+            var textView = GetActiveTextView();
+            if (textView == null) return;
 
-        private void AcceptAISuggestion()
-        {
-            // TODO: Implement logic for accepting AI suggestion
+            var caretPosition = textView.Caret.Position.BufferPosition;
+            var line = caretPosition.GetContainingLine();
+
+            // Get the AI suggestion from the tooltip
+            var aiSuggestion = (_tooltipControl.Content as TextBlock)?.Text;
+            if (string.IsNullOrEmpty(aiSuggestion)) return;
+
+            // Replace the entire line with the AI suggestion
+            using (var edit = textView.TextBuffer.CreateEdit())
+            {
+                edit.Replace(line.Start, line.Length, aiSuggestion);
+                edit.Apply();
+            }
+
+            // Move the caret to the end of the new line
+            textView.Caret.MoveTo(new SnapshotPoint(textView.TextBuffer.CurrentSnapshot, line.Start.Position + aiSuggestion.Length));
+
             _tooltipControl.IsOpen = false;
         }
 
