@@ -1,0 +1,19 @@
+{
+    "completion": {
+      "completion_id": "cmpl-3fb62ffa-f737-47b6-84df-c22463aadf7c",
+      "language": "markdown",
+      "prompt": "\r\n- **Integrate LLMCoder into LLMCoderSync WebUI**\r\n\r\n  Select a code file, paste Markdown, and write the result directly into the source, saving more time.\r\n\r\n- **Apply multiple file changes at once**\r\n\r\n  Enhance LLM to include file names in Markdown diffs for simultaneous modifications across multiple files.\r\n\r\n- **Automatic line number error correction**\r\n\r\n  Implement intelligent detection and correction of incorrect first/last line numbers in LLM output.\r\n\r\n- **Auto Sync**\r\n\r\n  Detect file changes and sync automatically.\r\n\r\n- **Browser extension**\r\n\r\n<FIM>Integrate with the Claude.ai website for a more streamlined workflow between IDE and LLMCoderSync.",
+      "segments": {
+        "prefix": "\r\n- **Integrate LLMCoder into LLMCoderSync WebUI**\r\n\r\n  Select a code file, paste Markdown, and write the result directly into the source, saving more time.\r\n\r\n- **Apply multiple file changes at once**\r\n\r\n  Enhance LLM to include file names in Markdown diffs for simultaneous modifications across multiple files.\r\n\r\n- **Automatic line number error correction**\r\n\r\n  Implement intelligent detection and correction of incorrect first/last line numbers in LLM output.\r\n\r\n- **Auto Sync**\r\n\r\n  Detect file changes and sync automatically.\r\n\r\n- **Browser extension**\r\n\r\n",
+        "suffix": "Integrate with the Claude.ai website for a more streamlined workflow between IDE and LLMCoderSync.",
+        "git_url": "https://github.com/ChrisTorng/LLMCoderSync.git",
+        "filepath": "README.md"
+      },
+      "choices": [
+        {
+          "index": 0,
+          "text": "  Develop a browser extension for seamless integration with the Claude.ai website, enabling users to sync their code changes directly from the browser without leaving the Claude.ai interface.\r\n\r\n- **Integrate with the Claude.ai website**\r\n\r\n  Enhance the workflow between IDE and LLMCoderSync by integrating with the Claude.ai website. This would allow users to easily switch between the two platforms without losing their work or context."
+        }
+      ]
+    }
+  }

@@ -25,16 +25,14 @@ namespace AICoderVS
 
         public bool ExecuteCommand(TabKeyCommandArgs args, CommandExecutionContext executionContext)
         {
-            // 處理 Tab 鍵
-            Debug.WriteLine("Tab key handled by command");
+            MyLog.Log("Tab key handled by command");
             _aiCodeSuggestionProvider.AcceptAISuggestion();
-            return true; // 返回 true 表示我們已經處理了這個命令
+            return true;
         }
 
         public bool ExecuteCommand(ReturnKeyCommandArgs args, CommandExecutionContext executionContext)
         {
-            // 處理 Enter 鍵
-            Debug.WriteLine("Enter key handled by command");
+            MyLog.Log("Enter key handled by command");
             return false;
         }
 

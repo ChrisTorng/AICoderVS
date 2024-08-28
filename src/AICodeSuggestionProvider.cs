@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Utilities;
+using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -75,8 +76,19 @@ namespace AICoderVS
 
         private async Task<string> GetAISuggestionAsync(string currentLineText, SnapshotPoint caretPosition)
         {
-            // TODO: Implement actual communication logic with AI service
-            await Task.Delay(100); // Simulate asynchronous operation
+            TabbyService tabbyService = new TabbyService();
+            try
+            {
+                HealthState healthState = await tabbyService.GetHealthStateAsync();
+                MyLog.Log($"Tabby version: {healthState.Version.GitDescribe}");
+                MyLog.Log($"CPU info: {healthState.CpuInfo}");
+                MyLog.Log($"Device: {healthState.Device}");
+            }
+            catch (Exception ex)
+            {
+                MyLog.Log($"Get healthState error: {ex.Message}");
+            }
+
             return "AI Suggestion: " + currentLineText;
         }
 
